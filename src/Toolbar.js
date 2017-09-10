@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Toolbar = ({messages, selectAllHandler, markAsReadHandler, markAsUnreadHandler, deleteMessagesHandler, removeLabelHandler, addLabelHandler}) => {
+const Toolbar = ({  messages, selectAllHandler, composeMessageHandler, markAsReadHandler,
+                    markAsUnreadHandler, deleteMessagesHandler, removeLabelHandler, addLabelHandler }) => {
 
 
   let selectedMessages = messages.filter(message => {
@@ -101,7 +102,7 @@ const removeLabel = (e) => {
 
     return message;
   })
-  removeLabelHandler(newMessages);
+  removeLabelHandler(newMessages, e.target.value);
 }
 
 const addLabel = (e) => {
@@ -116,8 +117,12 @@ const addLabel = (e) => {
     }
     return message;
   })
-  addLabelHandler(newMessages);
+  addLabelHandler(newMessages,  e.target.value);
 }
+
+// const toggleComposeMessage = (e) => {
+//   composeMessageHandler();
+// }
 
 
 return(
@@ -128,7 +133,7 @@ return(
       unread messages
     </p>
 
-    <a className="btn btn-danger">
+    <a className="btn btn-danger" onClick={composeMessageHandler}>
       <i className="fa fa-plus"></i>
     </a>
 
