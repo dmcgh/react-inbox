@@ -5,14 +5,14 @@ import { toggleMessageStar } from './actions'
 import { toggleSelectMessage } from './actions'
 
 
-const MessageList = ({ messages, selectMessage, starHandler, selectedHandler }) => {
+const MessageList = ({messages, starHandler, selectedHandler}) => {
 
+alert(JSON.stringify(messages))
   const messageStatus = (message) => {
     let read;
     let selected;
 
     // console.log("From MessageList: " + message.defaultChecked)
-    // console.log(message.read)
     if(!message.read)
       read = "unread";
     else
@@ -28,8 +28,9 @@ const MessageList = ({ messages, selectMessage, starHandler, selectedHandler }) 
       message.defaultChecked = false;
     }
 
-    console.log("From MessageList: " + "row message " + read + " " + selected)
+    // console.log("From MessageList: " + "row message " + read + " " + selected)
     return "row message " + read + " " + selected;
+
   }
 
   const messageStarred = (message) => {
@@ -57,16 +58,16 @@ const MessageList = ({ messages, selectMessage, starHandler, selectedHandler }) 
 
   return (
     <div>
-  {messages.map((message, idx) => {
+  {messages.all.map((message, idx) => {
     return (
       <div id={idx} key={idx} className={messageStatus(message)} >
       <div className="col-xs-1">
         <div className="row">
           <div className="col-xs-2">
-            <input id={message.id} key={idx} type="checkbox" checked={message.defaultChecked} onChange={toggleSelected}/>
+            <input id={idx} key={idx} type="checkbox" checked={message.defaultChecked} onChange={toggleSelected}/>
           </div>
           <div className="col-xs-2">
-            <i id={message.id} key={idx} className={messageStarred(message)} onClick={toggleStarred}></i>
+            <i id={idx} key={idx} className={messageStarred(message)} onClick={toggleStarred}></i>
           </div>
         </div>
       </div>
@@ -80,7 +81,8 @@ const MessageList = ({ messages, selectMessage, starHandler, selectedHandler }) 
       </div>
     </div>)
 })}
-  </div>)
+  </div>
+)
 }
 
 const mapStateToProps = state => ({
@@ -95,3 +97,6 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(MessageList)
+
+
+// export default MessageList;

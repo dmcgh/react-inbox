@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { createNewMessage } from './actions'
 
 const ComposeMessage = ({visible, createMessageHandler}) => {
 
@@ -20,7 +23,7 @@ const setBody = (e) => {
   body = e.target.value;
 }
 
-
+// alert(visible)
   if(visible){
     return(
   <form className="form-horizontal well">
@@ -54,4 +57,17 @@ const setBody = (e) => {
 else return null;
 }
 
-export default ComposeMessage;
+
+const mapStateToProps = state => ({
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  createMessageHandler: createNewMessage, }, dispatch)
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ComposeMessage)
+
+// export default ComposeMessage;
